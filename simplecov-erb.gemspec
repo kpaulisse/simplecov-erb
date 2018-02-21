@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 Gem::Specification.new do |s|
   s.name        = "simplecov-erb"
-  s.version     = "0.1"
+  s.version     = File.read(File.expand_path("./VERSION", File.dirname(__FILE__)))
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Kevin Paulisse"]
   s.email       = ["kpaulisse@gmail.com"]
@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "simplecov-erb"
   s.files         = ["lib/simplecov-erb.rb", "views/simplecov.erb"]
-  s.test_files    = ["spec/spec_helper.rb", "spec/simplecov-erb_spec.rb"]
   s.require_paths = ["lib"]
 
   s.add_dependency "simplecov"

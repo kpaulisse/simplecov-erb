@@ -38,7 +38,7 @@ class SimpleCov::Formatter::ERB
 
   def shortened_filename(filename)
     if filename.start_with?(SimpleCov.root)
-      filename[SimpleCov.root.length .. -1]
+      filename[SimpleCov.root.length..-1]
     else
       filename
     end

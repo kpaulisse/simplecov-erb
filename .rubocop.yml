@@ -2,9 +2,14 @@ inherit_gem:
   rubocop-github:
     - config/default.yml
 
+Style/FileName:
+  Exclude:
+    - 'lib/simplecov-erb.rb'
+    - 'spec/simplecov-erb_spec.rb'
+
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 1.9
   Exclude:
     - 'bin/*'
     - 'vendor/gems/**/*'

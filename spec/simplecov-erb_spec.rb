@@ -56,4 +56,23 @@ Incomplete test coverage
       end
     end
   end
+
+  context "with an alternate ERB" do
+    before(:all) do
+      generate_fixture("SIMPLECOV_ERB_FIXTURE_ERB_FILE" => File.expand_path("./fixtures/alternate.erb", File.dirname(__FILE__)))
+    end
+
+    let(:file) { File.join(coveragedir, "coverage.txt") }
+
+    describe "#format" do
+      it "creates the coverage file in the expected location" do
+        expect(File.file?(file)).to eq(true)
+      end
+
+      it "returns the correctly formatted message as per the default template" do
+        actual = File.read(file)
+        expect(actual).to eq(default_answer.sub("Incomplete test coverage", "Alternate ERB file"))
+      end
+    end
+  end
 end

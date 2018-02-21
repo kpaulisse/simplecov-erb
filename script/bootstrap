@@ -8,7 +8,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 cd "$DIR"
 rm -rf "${DIR}/.bundle"
 bundle config --local path "vendor/bundle"
-bundle install --without="" --no-prune --path "vendor/bundle" --local
+bundle install --without="" --no-prune --path "vendor/bundle" --binstubs --local
 
 echo "Completed script/bootstrap successfully"
 exit 0

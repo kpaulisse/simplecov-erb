@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Starting script/cibuild"
+
+set -e
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+cd "$DIR"
+
+# -- Bootstrap
+"$DIR/script/bootstrap"
+
+# -- Rubocop the code we care about (skip the fixture)
+bundle exec rubocop lib/ spec/ views/

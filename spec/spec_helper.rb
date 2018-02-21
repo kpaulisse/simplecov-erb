@@ -2,10 +2,11 @@
 require "rubygems"
 require "bundler/setup"
 require "open3"
+require "rspec"
+require "tmpdir"
+
 require "simplecov"
 require "simplecov-erb"
-
-require "rspec"
 
 RSpec.configure do |config|
   config.add_setting :tempdir

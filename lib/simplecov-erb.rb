@@ -12,20 +12,8 @@ class SimpleCov::Formatter::ERBFormatter
     @output_filename = filename
   end
 
-  def output_message(result)
-    "Coverage report generated for #{result.command_name} to #{output_filepath}. #{result.covered_lines} / #{result.total_lines} LOC (#{result.covered_percent.round(2)}%) covered."
-  end
-
   def erb_file=(filename)
     @erb_file = filename
-  end
-
-  def erb_filename=(filename)
-    @erb_filename = filename
-  end
-
-  def erb_path=(path)
-    @erb_path = path
   end
 
   def self.missed_lines(source_file)
@@ -48,23 +36,19 @@ class SimpleCov::Formatter::ERBFormatter
 
   def template
     # Path, safe_mode, trim_mode
-    ERB.new(File.read(erb_filepath), nil, "-")
+    ERB.new(File.read(erb_file), nil, "-")
   end
 
-  def erb_filename
-    @erb_filename || "simplecov.erb"
+  def output_message(result)
+    "Coverage report generated for #{result.command_name} to #{output_filepath}. #{result.covered_lines} / #{result.total_lines} LOC (#{result.covered_percent.round(2)}%) covered."
   end
 
-  def erb_filepath
-    @erb_file || File.join(erb_path, erb_filename)
-  end
-
-  def erb_path
-    @erb_path || File.expand_path("../views", File.dirname(__FILE__))
+  def erb_file
+    @erb_file || File.expand_path("../views/simplecov.erb", File.dirname(__FILE__))
   end
 
   def output_filename
-    @output_filename || "coverage.txt"
+    @output_filename ? File.basename(@output_filename) : "coverage.txt"
   end
 
   def output_filepath

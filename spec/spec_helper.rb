@@ -11,7 +11,7 @@ RSpec.configure do |config|
   config.add_setting :tempdir
 
   config.before(:suite) do
-    config.tempdir = Dir.mktmpdir("simplecov-erb-")
+    config.tempdir = Dir.mktmpdir
     ENV["SIMPLECOV_ERB_TEMPDIR"] = config.tempdir
 
     basedir = File.expand_path("..", File.dirname(__FILE__))

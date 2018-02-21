@@ -5,7 +5,7 @@ require "simplecov"
 class SimpleCov::Formatter::ERBFormatter
   # This is the entry point.
   def format(result)
-    File.open(File.join(output_filepath), "wb") { |file| file.puts template.result(binding) }
+    File.open(output_filepath, "wb") { |file| file.puts template.result(binding) }
     puts output_message(result)
   end
 

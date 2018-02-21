@@ -10,7 +10,11 @@ cd "$DIR"
 "$DIR/script/bootstrap"
 
 # -- Rubocop the code we care about (skip the fixture)
-bundle exec rubocop lib/ spec/ views/
+if [ -z "$SKIP_RUBOCOP" ]; then
+  bundle exec rubocop lib/ spec/ views/
+else
+  echo "** Skipped rubocop tests, since \$SKIP_RUBOCOP is set."
+fi
 
 # -- rspec tests
 bundle exec rspec spec/

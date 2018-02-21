@@ -1,0 +1,12 @@
+# simplecov-erb formatter
+
+language: ruby
+install: true
+script: "script/cibuild"
+
+matrix:
+  include:
+    - rvm: 2.5
+    - rvm: 2.1
+    - rvm: 2.0
+    - rvm: 1.9

@@ -11,3 +11,6 @@ cd "$DIR"
 
 # -- Rubocop the code we care about (skip the fixture)
 bundle exec rubocop lib/ spec/ views/
+
+# -- rspec tests
+bundle exec rspec spec/

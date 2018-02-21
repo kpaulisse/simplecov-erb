@@ -4,7 +4,7 @@ require_relative "spec_helper"
 require "fileutils"
 require "shellwords"
 
-describe SimpleCov::Formatter::ERB do
+describe SimpleCov::Formatter::ERBFormatter do
   let(:subject) { described_class.new }
 
   let(:file) { File.join(ENV["SIMPLECOV_ERB_TEMPDIR"], "coverage.txt") }

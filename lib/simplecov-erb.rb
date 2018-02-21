@@ -2,7 +2,7 @@
 require "erb"
 require "simplecov"
 
-class SimpleCov::Formatter::ERB
+class SimpleCov::Formatter::ERBFormatter
   def format(result)
     File.open(File.join(output_filepath), "wb") { |file| file.puts template.result(binding) }
     puts output_message(result)

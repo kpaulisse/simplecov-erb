@@ -8,7 +8,7 @@ require "rspec"
 
 SimpleCov.start do
   add_filter "/spec"
-  formatter SimpleCov::Formatter::ERB
+  formatter SimpleCov::Formatter::ERBFormatter
   if ENV["SIMPLECOV_ERB_TEMPDIR"]
     coverage_dir ENV["SIMPLECOV_ERB_TEMPDIR"]
   else

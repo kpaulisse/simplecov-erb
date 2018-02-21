@@ -44,13 +44,11 @@ def generate_fixture(env = {})
   result, exitstatus = Open3.capture2e(env, command)
 
   unless exitstatus.exitstatus == 0
-    STDERR.puts result if result
-    raise "Error: Failed to execute fixture generator command #{command.inspect}"
+    raise "Error: Failed to execute fixture generator command #{command.inspect}!\n#{result}"
   end
 
   unless File.directory?(coveragedir)
-    STDERR.puts result if result
-    raise "Error: Fixture generation did not build the expected coverage directory at #{coveragedir.inspect}"
+    raise "Error: Fixture generation did not build the expected coverage directory at #{coveragedir.inspect}\n#{result}"
   end
 
   nil

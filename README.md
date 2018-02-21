@@ -53,7 +53,8 @@ SimpleCov.start do
   # You can choose a different template if you don't want to use the default.
   SimpleCov::Formatter::ERBFormatter.erb_file = "/some/path/template.erb"
 
-  # Sometimes it's handy to have the ERB file be relative to *this* file.
+  # Sometimes it's handy to have the ERB file be relative to *this* file. So instead
+  # of the previous line, you could do this instead.
   SimpleCov::Formatter::ERBFormatter.erb_file = File.expand_path("./templates/template.erb", File.dirname(__FILE__))
 
   # You can choose a different output filename if you don't want to use "coverage.txt".
@@ -69,7 +70,7 @@ Fork the repo and run `script/bootstrap` to install dependencies. Then, run `scr
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/kpaulisse/simplecov-erb.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kpaulisse/simplecov-erb. Contributors are expected to adhere to the [code of conduct](/CODE_OF_CONDUCT.md) published in this repository.
 
 ## License
 

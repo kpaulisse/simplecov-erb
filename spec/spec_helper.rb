@@ -1,37 +1,55 @@
 # frozen_string_literal: true
 require "rubygems"
 require "bundler/setup"
+require "fileutils"
 require "open3"
 require "rspec"
-require "tmpdir"
 
 require "simplecov"
 require "simplecov-erb"
 
-RSpec.configure do |config|
-  config.add_setting :tempdir
+# Get the base directory of this repository. It's one directory "up"
+# from the directory with this file.
+#
+# Takes no arguments.
+#
+# Returns a String with the absolute path to the base directory.
+def basedir
+  File.expand_path("..", File.dirname(__FILE__))
+end
 
-  config.before(:suite) do
-    config.tempdir = Dir.mktmpdir
-    ENV["SIMPLECOV_ERB_TEMPDIR"] = config.tempdir
+# Get the directory where the coverage file is expected to be placed.
+#
+# Takes no arguments.
+#
+# Returns a String with the absolute path to the coverage directory.
+def coveragedir
+  File.join(basedir, "test", "coverage")
+end
 
-    basedir = File.expand_path("..", File.dirname(__FILE__))
-    rspec = File.join(basedir, "bin", "rspec")
-    fixture = File.join(basedir, "test")
+# Generate the fixture by running the simple tests in the fixture directory. The
+# default SimpleCov coverage directory will be <repo>/test/coverage (which is
+# conveniently .gitignore'd).
+#
+# env - optionally a Hash[String => String] with additional environment variables.
+#
+# Returns nothing.
+def generate_fixture(env = {})
+  rspec = File.join(basedir, "bin", "rspec")
+  test_base = File.join(basedir, "test")
 
-    command = "cd #{Shellwords.escape(basedir)} && #{Shellwords.escape(rspec)} #{Shellwords.escape(fixture)}"
-    result, exitstatus = Open3.capture2e(command)
-    unless exitstatus.exitstatus == 0
-      STDERR.puts result
-      raise "Error: Failed to execute fixture generator command #{command.inspect}"
-    end
+  FileUtils.remove_entry_secure(coveragedir) if File.directory?(coveragedir)
+
+  command = "cd #{Shellwords.escape(basedir)} && #{Shellwords.escape(rspec)} #{Shellwords.escape(test_base)}"
+  result, exitstatus = Open3.capture2e(env, command)
+
+  unless exitstatus.exitstatus == 0
+    raise "Error: Failed to execute fixture generator command #{command.inspect}!\nexitcode = #{exitstatus.exitstatus}\n#{result}"
   end
 
-  config.after(:suite) do
-    if config.tempdir && File.directory?(config.tempdir)
-      FileUtils.remove_entry_secure(config.tempdir)
-    else
-      warn "Could not clean up tempdir"
-    end
+  unless File.directory?(coveragedir)
+    raise "Error: Fixture generation did not build the expected coverage directory at #{coveragedir.inspect}\n#{result}"
   end
+
+  nil
 end

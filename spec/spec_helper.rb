@@ -44,7 +44,7 @@ def generate_fixture(env = {})
   result, exitstatus = Open3.capture2e(env, command)
 
   unless exitstatus.exitstatus == 0
-    raise "Error: Failed to execute fixture generator command #{command.inspect}!\n#{result}"
+    raise "Error: Failed to execute fixture generator command #{command.inspect}!\nexitcode = #{exitstatus.exitstatus}\n#{result}"
   end
 
   unless File.directory?(coveragedir)

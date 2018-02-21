@@ -34,4 +34,26 @@ Incomplete test coverage
       end
     end
   end
+
+  context "with an alternate filename configuration" do
+    before(:all) { generate_fixture("SIMPLECOV_ERB_FIXTURE_OUTPUT_FILENAME" => "foofoo.txt") }
+
+    let(:file) { File.join(coveragedir, "foofoo.txt") }
+
+    describe "#format" do
+      it "creates the coverage file in the expected location" do
+        expect(File.file?(file)).to eq(true)
+      end
+
+      it "does not create the default coverage file" do
+        default_file = File.join(coveragedir, "coverage.txt")
+        expect(File.file?(default_file)).to eq(false)
+      end
+
+      it "returns the correctly formatted message as per the default template" do
+        actual = File.read(file)
+        expect(actual).to eq(default_answer)
+      end
+    end
+  end
 end

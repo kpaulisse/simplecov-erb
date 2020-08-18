@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simplecov-erb (0.2.0)
+    simplecov-erb (1.0.0)
       simplecov
 
 GEM
@@ -54,3 +54,6 @@ DEPENDENCIES
   rubocop (= 0.49.1)
   rubocop-github (~> 0.5.0, >= 0.5.0)
   simplecov-erb!
+
+BUNDLED WITH
+   1.16.1

@@ -4,7 +4,7 @@
 
 This project was born out of the need to display a coverage summary in the plain text output of CI jobs, along the lines of:
 
-```
+```text
 --------------------------------------------------------------------------------
 Incomplete test coverage
 --------------------------------------------------------------------------------
@@ -27,22 +27,34 @@ gem "simplecov-erb", require: false
 
 To pull in the dependencies:
 
-```
-$ script/bootstrap
+```shell
+script/bootstrap
 ```
 
 Or install it yourself as:
 
-```
-$ gem install simplecov-erb
+```shell
+gem install simplecov-erb
 ```
 
 ## Usage
 
-At this point, it's assumed you've already set up [SimpleCov](https://github.com/colszowka/simplecov) and that it's all configured and working. Once you're to that point, edit your `spec_helper.rb`, `test_helper.rb`, or `.simplecov` like below:
+At this point, it's assumed you've already set up [SimpleCov](https://github.com/simplecov-ruby/simplecov) and that it's all configured and working. Once you're to that point, edit your `spec_helper.rb`, `test_helper.rb`, or `.simplecov` like this. This default configuration outputs to a file named `coverage/coverage.txt` in the format from the example above.
 
 ```ruby
-# test_helper.rb
+# spec_helper.rb
+
+require "simplecov-erb"
+
+SimpleCov.start do
+  SimpleCov.formatter = SimpleCov::Formatter::ERBFormatter
+end
+```
+
+If you need to exercise more control over the settings, consult this fully-commented example that demonstrates all of the additional settings:
+
+```ruby
+# spec_helper.rb
 
 require "simplecov-erb"
 
@@ -55,7 +67,7 @@ SimpleCov.start do
 
   # Sometimes it's handy to have the ERB file be relative to *this* file. So instead
   # of the previous line, you could do this instead.
-  SimpleCov::Formatter::ERBFormatter.erb_file = File.expand_path("./templates/template.erb", File.dirname(__FILE__))
+  SimpleCov::Formatter::ERBFormatter.erb_file = File.expand_path("./templates/template.erb", __dir__)
 
   # You can choose a different output filename if you don't want to use "coverage.txt".
   # This file will still appear in the "coverage" directory (or whatever directory
@@ -64,13 +76,21 @@ SimpleCov.start do
 end
 ```
 
+## Support status
+
+This project is mature. It's simple, it works, and it's feature-complete as per its original vision.
+
+Maintenance at this point is pretty much limited to updating the vendored dependencies as vulnerabilities are reported by GitHub. I do intend to update this if it ever becomes incompatible with a new release of simplecov. Except as required to maintain compatibility, I am not planning to add new features.
+
+Contributions are welcome. If you're planning to make any substantial changes or additions, please consider opening an Issue first to make sure whatever you're planning is compatible with the objectives of this project.
+
 ## Development
 
 Fork the repo and run `script/bootstrap` to install dependencies. Then, run `script/cibuild` to run the tests.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/kpaulisse/simplecov-erb. Contributors are expected to adhere to the [code of conduct](/CODE_OF_CONDUCT.md) published in this repository.
+Bug reports and pull requests are welcome on GitHub at <https://github.com/kpaulisse/simplecov-erb>. Contributors are expected to adhere to the [code of conduct](/CODE_OF_CONDUCT.md) published in this repository.
 
 ## License
 

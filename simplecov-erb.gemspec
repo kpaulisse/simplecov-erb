@@ -9,7 +9,6 @@ Gem::Specification.new do |s|
   s.summary     = "Customizable text formatter for SimpleCov code coverage tool for ruby 1.9+"
   s.description = "Customizable text formatter for SimpleCov code coverage tool for ruby 1.9+"
 
-  s.rubyforge_project = "simplecov-erb"
   s.files         = ["lib/simplecov-erb.rb", "views/simplecov.erb"]
   s.require_paths = ["lib"]
 

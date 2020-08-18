@@ -6,7 +6,7 @@ script: "script/cibuild"
 
 matrix:
   include:
-    - rvm: 2.5
+    - rvm: 2.7
       env: SKIP_RUBOCOP=""
     - rvm: 2.1
       env: SKIP_RUBOCOP="true"

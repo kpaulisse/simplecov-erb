@@ -50,7 +50,7 @@ class SimpleCov::Formatter::ERBFormatter
 
   def template
     # Path, safe_mode, trim_mode
-    ERB.new(File.read(erb_file), nil, "-")
+    ERB.new(File.read(erb_file), trim_mode: "-")
   end
 
   def output_message(result)

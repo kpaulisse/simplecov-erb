@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    simplecov-erb (1.0.0)
-      simplecov
+    simplecov-erb (1.0.1)
+      simplecov (< 1.0)
 
 GEM
   remote: https://rubygems.org/

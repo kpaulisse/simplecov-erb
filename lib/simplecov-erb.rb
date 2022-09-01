@@ -49,8 +49,14 @@ class SimpleCov::Formatter::ERBFormatter
   private
 
   def template
-    # Path, safe_mode, trim_mode
-    ERB.new(File.read(erb_file), nil, "-")
+    # This syntax changed between Ruby versions 2.5 and 2.6. Although 2.5 is EOL, this will keep backward
+    # compatibility for those who are not yet on 2.6+. We use Gem::Version to compare instead of strings,
+    # which are rife with errors.
+    if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.6.0")
+      ERB.new(File.read(erb_file), trim_mode: "-")
+    else
+      ERB.new(File.read(erb_file), nil, "-")
+    end
   end
 
   def output_message(result)

@@ -48,7 +48,6 @@ GEM
 
 PLATFORMS
   ruby
-  universal-darwin-21
 
 DEPENDENCIES
   rspec (~> 3.7.0, >= 3.7.0)
@@ -57,4 +56,4 @@ DEPENDENCIES
   simplecov-erb!
 
 BUNDLED WITH
-   1.17.2
+   1.16.1
